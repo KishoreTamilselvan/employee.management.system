@@ -14,6 +14,6 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%-10s%-15s%-15s%-20s%-20s",empId,empName,empPhNo,jobRole,exp);
+        return String.format("%-10s%-15s%-15s%-25s%-20s",empId,empName,empPhNo,jobRole,exp);
     }
 }
