@@ -32,7 +32,7 @@ public class EmployeeManagement {
 
         do {
             System.out.println("\n***WELCOME TO EMPLOYEE MANAGEMENT SYSTEM***\n");
-            System.out.println("1. View all Employees\n2. Add Employee\n3. Edit Employee Details\n4. Delete Employee Details\n5. Exit");
+            System.out.println("1. View all Employees\n2. Add Employee\n3. Search Employee\n4. Edit Employee Details\n5. Delete Employee Details\n6. Exit");
             System.out.println("Enter Your Choice:");
 
             try {
@@ -59,14 +59,18 @@ public class EmployeeManagement {
                     break;
                 }
                 case 3:{
-                    editEmployee();
+                    searchEmp();
                     break;
                 }
                 case 4:{
-                    removeEmployee();
+                    editEmployee();
                     break;
                 }
                 case 5:{
+                    removeEmployee();
+                    break;
+                }
+                case 6:{
                     autoSave();
                     System.out.println("Exiting...!");
                     b=false;
@@ -304,5 +308,25 @@ public class EmployeeManagement {
             }
         }
         return false;
+    }
+    static void searchEmp(){
+        Set<Integer> set=empData.keySet();
+        System.out.println("\n"+set);
+        while (!isValidData){
+            try{
+                System.out.println("Enter the Employee ID to Search:");
+                empId=sc.nextInt();
+                isValidData=true;
+                    if(set.contains(empId)){
+                        Employee emp=empData.get(empId);
+                        System.out.println(String.format("%-10s%-15s%-15s%-25s%-20s", "ID","Name","Phone-No","Designation","Exp in Year"));
+                        System.out.println(String.format("%-10s%-15s%-15s%-25s%-20s", emp.exp,emp.empName,emp.empPhNo,emp.jobRole,emp.exp));
+                        break;
+                    }else System.out.println("Employee does not exist..!");
+                } catch (Exception e){
+                System.out.println("Enter the valid input..!");
+                sc.nextLine();
+            }
+        }
     }
 }
