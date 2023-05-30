@@ -47,7 +47,7 @@ public class EmployeeManagement {
                         fis=new FileInputStream(file);
                         ois=new ObjectInputStream(fis);
                         HashMap<Integer,Employee> e=(HashMap<Integer,Employee>) ois.readObject();
-                        Functions.display(e);
+                        display(e);
                     } catch (IOException | ClassNotFoundException e) {
                         System.out.println(e);
                     }
@@ -55,7 +55,7 @@ public class EmployeeManagement {
                 }
                 case 2:{
                     addEmployee();
-                    Functions.autoSave();
+                    autoSave();
                     break;
                 }
                 case 3:{
@@ -67,7 +67,7 @@ public class EmployeeManagement {
                     break;
                 }
                 case 5:{
-                    Functions.autoSave();
+                    autoSave();
                     System.out.println("Exiting...!");
                     b=false;
                     break;
@@ -104,7 +104,7 @@ public class EmployeeManagement {
                     }
                 }
                 isValidData=false;
-            }while (Functions.checkPhNo(empPhNo));
+            }while (checkPhNo(empPhNo));
             //Getting Job Role
             System.out.println("Employee Designation:");
             System.out.println("1. Software Development\n2. Software Testing\n3. UI/UX Designer\n4. Human Resource\n5. Business Development\nEnter your choice:");
@@ -128,14 +128,14 @@ public class EmployeeManagement {
             }while (true);
             //Put all the data into the HashMap
             empData.put(id,(new Employee(id,empName,empPhNo,jobRole,exp)));
-            Functions.display(empData);
+            display(empData);
             System.out.println("\n***Details Added Successfully***\n");
-            Functions.autoSave();
+            autoSave();
             System.out.println("Add one more Employee?\n1. Yes\n2. No");
         }while (sc.nextInt()==1);
     }
     static void removeEmployee(){
-        Functions.display(empData);
+        display(empData);
         while (!isValidData){
             try {
                 System.out.println("\nEnter the Employee-ID to Delete the Details:");
@@ -147,7 +147,7 @@ public class EmployeeManagement {
                         if(e.getKey()==empId){
                             empData.remove(empId);
                             System.out.println("Details of the Employee is Successfully Removed...\n");
-                            Functions.display(empData);
+                            display(empData);
                             count++;
                             if(count==0)
                                 System.out.println("\nEmployee Details are not available, Please enter a valid ID!!");
@@ -169,7 +169,7 @@ public class EmployeeManagement {
         return false;
     }
     static void editEmployee(){
-        Functions.display(empData);
+        display(empData);
         System.out.println("\nEnter the Employee-ID to Edit the Details");
         int edit;
         boolean condition=false;
@@ -208,7 +208,7 @@ public class EmployeeManagement {
                                             sc.nextLine();
                                         }
                                     }
-                                }while (Functions.checkPhNo(empPhNo));
+                                }while (checkPhNo(empPhNo));
                                 e.empPhNo=empPhNo;
                                 System.out.println("Phone Number Updated Successfully.\n");
                                 break;
@@ -259,9 +259,50 @@ public class EmployeeManagement {
                             }
                         }
                     }while (condition);
-                    Functions.autoSave();
+                    autoSave();
                 }
             }
         }else System.out.println("Employee does not exist..!");
+    }
+    static void display(HashMap<Integer,Employee> employee){
+        System.out.println("\n--------------Employee List---------------\n");
+        System.out.println(String.format("%-10s%-15s%-15s%-25s%-20s", "ID","Name","Phone-No","Designation","Exp in Year"));
+        for (Map.Entry e:employee.entrySet()) {
+            System.out.println(e.getValue());
+        }
+        autoSave();
+    }
+    static void autoSave(){
+        try {
+            fos = new FileOutputStream(file);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(empData);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        finally{
+            try {
+                fis.close();
+                ois.close();
+                fos.close();
+                oos.close();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+    }
+    static boolean checkPhNo(long n){
+        if(String.valueOf(n).length()!=10) {
+            System.out.println("Please enter the valid 10 digit input..!!");
+            return true;
+        }else {
+            for (Employee i:empData.values()){
+                if(i.empPhNo==n){
+                    System.out.println("This Phone-No is already exist. Please enter another Number..!");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
