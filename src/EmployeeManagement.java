@@ -317,12 +317,12 @@ public class EmployeeManagement {
                 System.out.println("Enter the Employee ID to Search:");
                 empId=sc.nextInt();
                 isValidData=true;
-                    if(set.contains(empId)){
-                        Employee emp=empData.get(empId);
-                        System.out.println(String.format("%-10s%-15s%-15s%-25s%-20s", "ID","Name","Phone-No","Designation","Exp in Year"));
-                        System.out.println(String.format("%-10s%-15s%-15s%-25s%-20s", emp.exp,emp.empName,emp.empPhNo,emp.jobRole,emp.exp));
-                        break;
-                    }else System.out.println("Employee does not exist..!");
+                if(set.contains(empId)){
+                    Employee emp=empData.get(empId);
+                    System.out.println(String.format("%-10s%-15s%-15s%-25s%-20s", "ID","Name","Phone-No","Designation","Exp in Year"));
+                    System.out.println(String.format("%-10s%-15s%-15s%-25s%-20s", emp.exp,emp.empName,emp.empPhNo,emp.jobRole,emp.exp));
+                    break;
+                }else System.out.println("Employee does not exist..!");
                 } catch (Exception e){
                 System.out.println("Enter the valid input..!");
                 sc.nextLine();
