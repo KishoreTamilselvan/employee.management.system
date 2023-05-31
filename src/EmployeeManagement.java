@@ -84,7 +84,7 @@ public class EmployeeManagement {
     }
     static void addEmployee(){
         do {
-            //Id Auto-Generated
+            //ID Auto-Generated
             id=ts.last();
             System.out.println("\n----Fill the details of the employee----\nEmployee ID: "+ ++id);
             //Getting name
@@ -94,7 +94,7 @@ public class EmployeeManagement {
                 if (!checkName(empName)) {
                     break;
                 } else {
-                    System.out.println("Enter the valid name..!");
+                    System.err.println("Enter the valid name..!");
                 }
             }while (true);
             //Getting Ph-No
@@ -105,7 +105,7 @@ public class EmployeeManagement {
                         empPhNo= sc.nextLong();
                         isValidData=true;
                     }catch (Exception e) {
-                        System.out.println("Enter the valid number..!");
+                        System.err.println("Enter the valid number..!");
                         sc.nextLine();
                     }
                 }
@@ -124,11 +124,11 @@ public class EmployeeManagement {
                         exp=sc.nextInt();
                         isValidData=true;
                     }catch (Exception e){
-                        System.out.println("Invalid input! Please enter a valid integer.");
+                        System.err.println("Invalid input! Please enter a valid integer.");
                         sc.nextLine();
                     }
                 if(exp>25)
-                    System.out.println("Experience should be less than 25years..");
+                    System.err.println("Experience should be less than 25years..");
                 else
                     break;
             }while (true);
@@ -156,10 +156,10 @@ public class EmployeeManagement {
                             display(empData);
                             count++;
                             if(count==0)
-                                System.out.println("\nEmployee Details are not available, Please enter a valid ID!!");
+                                System.err.println("\nEmployee Details are not available, Please enter a valid ID!!");
                         }
                     }
-                }else System.out.println("Employee does not exist..!");
+                }else System.err.println("Employee does not exist..!");
             }catch (Exception ex){
                 System.out.println("Enter valid input..!");
                 sc.nextLine();
@@ -193,7 +193,7 @@ public class EmployeeManagement {
                                     System.out.println("\nEnter Employee New Name:");
                                     empName= sc.next();
                                     if(checkName(empName)){
-                                        System.out.println("Enter the valid name..!");
+                                        System.err.println("Enter the valid name..!");
                                     }else{
                                         e.empName=empName;
                                         System.out.println("Employee Name Successfully Updated.\n");
@@ -210,7 +210,7 @@ public class EmployeeManagement {
                                             empPhNo= sc.nextLong();
                                             isValidData=true;
                                         }catch (Exception e2){
-                                            System.out.println("Enter a valid Phone Number..!");
+                                            System.err.println("Enter a valid Phone Number..!");
                                             sc.nextLine();
                                         }
                                     }
@@ -228,7 +228,7 @@ public class EmployeeManagement {
                                         jobRole=str[sc.nextInt()-1];
                                         isValidData=true;
                                     }catch (Exception e2){
-                                        System.out.println("Enter the correct option from the above list..!");
+                                        System.err.println("Enter the correct option from the above list..!");
                                         sc.nextLine();
                                     }
                                 }
@@ -243,10 +243,10 @@ public class EmployeeManagement {
                                         exp= sc.nextInt();
                                         isValidData=true;
                                     }catch (Exception e2){
-                                        System.out.println("Enter the valid number");
+                                        System.err.println("Enter the valid number");
                                     }
                                     if(exp>25) {
-                                        System.out.println("Experience should be less than 25years..");
+                                        System.err.println("Experience should be less than 25years..");
                                         isValidData=false;
                                     }
                                 }
@@ -259,7 +259,7 @@ public class EmployeeManagement {
                                 break;
                             }
                             default:{
-                                System.out.println("Enter correct choice from the above list..!");
+                                System.err.println("Enter correct choice from the above list..!");
                                 condition=true;
                                 break;
                             }
@@ -268,7 +268,7 @@ public class EmployeeManagement {
                     autoSave();
                 }
             }
-        }else System.out.println("Employee does not exist..!");
+        }else System.err.println("Employee does not exist..!");
     }
     static void display(HashMap<Integer,Employee> employee){
         System.out.println("\n--------------Employee List---------------\n");
@@ -304,7 +304,7 @@ public class EmployeeManagement {
         }else {
             for (Employee i:empData.values()){
                 if(i.empPhNo==n){
-                    System.out.println("This Phone-No is already exist. Please enter another Number..!");
+                    System.err.println("This Phone-No is already exist. Please enter another Number..!");
                     return true;
                 }
             }
@@ -324,9 +324,9 @@ public class EmployeeManagement {
                     System.out.println(String.format("%-10s%-15s%-15s%-25s%-20s", "ID","Name","Phone-No","Designation","Exp in Year"));
                     System.out.println(String.format("%-10s%-15s%-15s%-25s%-20s", emp.exp,emp.empName,emp.empPhNo,emp.jobRole,emp.exp));
                     break;
-                }else System.out.println("Employee does not exist..!");
+                }else System.err.println("Employee does not exist..!");
                 } catch (Exception e){
-                System.out.println("Enter the valid input..!");
+                System.err.println("Enter the valid input..!");
                 sc.nextLine();
             }
         }
