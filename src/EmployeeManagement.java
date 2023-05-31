@@ -38,7 +38,8 @@ public class EmployeeManagement {
             try {
                 index=sc.nextInt();
             }catch (Exception e){
-                System.out.println("Enter the valid input..!");
+                System.err.println("Enter the valid input..!");
+                sc.nextLine();
             }
 
             switch (index){
@@ -76,7 +77,8 @@ public class EmployeeManagement {
                     b=false;
                     break;
                 }
-                default:System.out.println("Please Enter Valid Input!");break;
+                default:
+                    break;
             }
         }while (b);
     }
